@@ -14,6 +14,8 @@
  Date: 08/01/2020 12:03:20
 */
 
+use xian;
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

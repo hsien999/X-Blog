@@ -13,6 +13,7 @@ use think\Controller;
 use app\common\model\Article;
 use think\Db;
 use think\model\Collection;
+use app\common\validate\ArticleValidate;
 
 /**
  * 文章管理接口
@@ -29,6 +30,9 @@ class ArticleController extends Controller
      */
     public function findCountByArticleId($article_id)
     {
+        $data['article_id'] = $article_id;
+        $validate = new ArticleValidate;
+
         try {
             $article = Article::get($article_id);
             if ($article != null) {
@@ -80,6 +84,7 @@ class ArticleController extends Controller
      */
     public function findByPage($pageCode = 1, $pageSize = 10, $begin_time = '', $end_time = '', $title = '')
     {
+
         try {
             if (input('param.site') == 'fronted') {
                 $list = Article::whereRaw('UNIX_TIMESTAMP(publish_time) <= :t and state like \'2\'', ['t' => time()])->paginate($pageSize, false, ['page' => $pageCode]);;
