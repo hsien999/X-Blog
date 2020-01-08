@@ -1500,7 +1500,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .directory-content {
     position: relative;
-    z-index: 0;
+    z-index: 1;
     max-width: 720px;
     margin-right: auto !important;
     margin-left: auto !important;
@@ -1536,8 +1536,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     display: inline-block;
     text-align: left;
     width: 250px;
+    max-height: 500px;
+    height: fit-content;
     bottom: 75px;
     overflow: auto;
+    overflow-x: hidden;
+    border: 1px rgba(0, 0, 0, 0.02) solid;
+    box-shadow: 1px 1px rgba(99, 100, 208, 0.11);
+    /*background-color: white;*/
 }
 
 #directory li, #directory ul {
@@ -1926,7 +1932,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .footer {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     margin-top: 0;
     padding-bottom: 50px;
     background-color: #fff

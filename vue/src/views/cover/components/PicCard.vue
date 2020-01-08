@@ -104,8 +104,8 @@
         .el-card__header {
             padding: 0 !important;
             height: 80%;
-            min-height: 280px;
-            max-height: 280px;
+            min-height: 260px;
+            max-height: 260px;
         }
     }
 </style>

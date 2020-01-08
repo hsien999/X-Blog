@@ -3,13 +3,11 @@
         <el-card>
             <div class="createPost-container">
                 <sticky :class-name="'sub-navbar '+ this.postForm.state">
-                    <!--                    <CommentDropdown v-model="postForm.comment_disabled"/>-->
-                    <!--                    <PlatformDropdown v-model="postForm.platforms"/>-->
                     <el-button style="margin-left: 10px;" type="success" @click="submitForm('published')">发布
                     </el-button>
                     <el-button type="warning" @click="submitForm('draft')">草稿</el-button>
-                    <el-button type="primary" @click="submitForm('save')">保存</el-button>
-                    <el-button type="danger" @click="submitForm('delete')">删除</el-button>
+                    <el-button type="primary" @click="submitForm('save')" v-show="this.isEdit">保存</el-button>
+                    <el-button type="danger" @click="submitForm('delete')" v-show="this.isEdit">删除</el-button>
                 </sticky>
 
 
@@ -120,7 +118,7 @@
         id: undefined,//文章id
         title: '', // 标题
         title_pic: '', // 图片url
-        author: 'Colborne',//作者
+        author: '',//作者
         content: '', // 文章摘要
         content_md: '', // 文章内容-md
         content_html: '', // 文章内容-html
@@ -129,7 +127,7 @@
         eye_count: 0,//
         publish_time: '', // 时间
         edit_time: '',
-        category: 'UI/UE',
+        category: '',
         tags: '',
 
         //头部内容-未设置
@@ -149,7 +147,7 @@
         },
         data() {
             const validateSourceUri = (rule, value, callback) => {
-                console.log(value);
+                // console.log(value);
                 if (value) {
                     if (validateURL(value)) {
                         callback()
@@ -267,7 +265,7 @@
             updateAction(valid) {
                 if (valid) {
                     this.loading = true;
-                    console.log(this.postForm.content_html.length);
+                    // console.log(this.postForm.content_html.length);
                     update(this.postForm).then(response => {
                         if (response.code === 20000) {
                             this.$notify({
@@ -339,9 +337,10 @@
             },
 
             editor(val) {
-                console.log(this.postForm.content_html.length);
                 this.postForm.content_md = val.md;
-                this.postForm.content_html = val.html;
+                if(val.html != ''){
+                    this.postForm.content_html = val.html;
+                }
                 if (this.isEdit) { //如果是修改操作，就定时保存文章数据
                     //定时器，每隔5分钟执行一次
                     // setTimeout(() => {

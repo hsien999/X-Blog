@@ -71,11 +71,16 @@
             }
         },
         created() {
+            // console.log('created');
+            if(this.$route.params.cp!=null){
+                this.listQuery.pageCode = parseInt(this.$route.params.cp);
+            }
             this.getList();
         },
         watch: {
             $route(to, from) {
                 this.listQuery.pageCode = parseInt(to.params.cp);
+                // console.log(this.listQuery.pageCode);
                 this.getList();
             }
         },
@@ -88,7 +93,7 @@
                 findByPageForSite(this.listQuery.pageCode, this.listQuery.pageSize).then(response => {
                     if (response.code === 20000) {
                         this.list = response.data.rows;
-                        this.total = Math.ceil(response.data.total/this.listQuery.pageSize);
+                        this.total = Math.ceil(response.data.total / this.listQuery.pageSize);
                         this.listLoading = false
                     }
                 }).catch(err => {
