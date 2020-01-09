@@ -17,9 +17,9 @@ return [
     // 数据库名
     'database'        => 'xian',
     // 用户名
-    'username'        => 'czt',
+    'username'        => 'root',
     // 密码
-    'password'        => '123456',
+    'password'        => '',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
